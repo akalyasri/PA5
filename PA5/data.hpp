@@ -6,6 +6,48 @@ class Data {
 
 public: // Member functions
 
+	Data(int cNum, int sTime, int tTime) {
+
+		customerNumber = cNum;
+
+		serviceTime = sTime;
+
+		totalTime = tTime;
+
+	}
+
+
+	// Getters
+
+	int getCustomerNumber(void) {
+		return customerNumber;
+	}
+
+	int getServiceTime(void) {
+		return serviceTime;
+	}
+
+	int getTotalTime(void) {
+		return totalTime;
+	}
+
+
+	// Setters
+
+	void setCustomerNumber(int cusNum) {
+		customerNumber = cusNum;
+	}
+
+	void setServiceTime(int serTime) {
+		serviceTime = serTime;
+	}
+
+	void setTotalTime(int totalT) {
+		totalTime = totalT;
+	}
+
+
+
 private:
 	int customerNumber; // Unique identifier; starts at 1; after 24 hours should be reset to 1
 	

@@ -9,8 +9,21 @@ public: // Member functions
 		pHead = nullptr;
 	}
 
-	void enqueue(int cusNum, int serTime, int totalT) { // insert
+	void enqueue(int cusNum, int serTime, int totalT) { // insert at end
 
+		if (pHead == NULL) {
+			pHead = new QueueNode(cusNum, serTime, totalT); // allocated memory then set 
+			pTail = pHead;
+		}
+		else { // inset at tail 
+			QueueNode* temp = pTail;
+			pTail = new QueueNode(cusNum, serTime, totalT);
+
+
+			//temp->pNext = pTail
+			temp->setPNext(pTail);
+			
+		}
 
 	}
 
@@ -22,6 +35,16 @@ public: // Member functions
 		}
 		else {
 			// TBD
+			pcNum = pHead->getData()->getCustomerNumber();
+			psTime = pHead->getData()->getServiceTime();
+			ptTime = pHead->getData()->getTotalTime();
+
+			QueueNode* temp = pHead;
+			pHead = pHead->getPNext();
+			delete temp;
+
+
+			return true;
 		}
 
 	}
