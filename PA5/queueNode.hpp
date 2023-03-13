@@ -8,6 +8,7 @@ public: // Member functions
 	QueueNode(int cNum, int sTime, int tTime) {
 
 		pData = new Data(cNum, sTime, tTime);
+		pNext = nullptr;
 		
 	}
 

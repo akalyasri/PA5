@@ -1,13 +1,109 @@
-#include "queue.hpp"
-#include <Windows.h>
+#include "testCase.hpp"
+
+test::test(){
+}
+
+test::~test(){
+}
 
 
-Queue *expressLane;
-Queue* normalLane;
+void test::testCaseEmptyEnqueue(void) {
 
-int main(void) {
+	cout << "Test Case: Enqueue with an Empty Queue" << endl;
+
+	Queue* emptyList;
+	emptyList = new Queue;
+
+	emptyList->enqueue(1,2,3);
+
+	if (emptyList->getpHead()->getData()->getCustomerNumber() != 1) {
+		cout << "Check enqueue function." << endl;
+	}
+	else {
+		cout << "Enqueue works for emoty queue" << endl;
+	}
 
 
+
+}
+
+
+void test::testCaseOneNodeEnqueue(void) {
+
+	cout << "Test Case: Enqueue on a Queue with One Node" << endl;
+
+	Queue* oneNodeList;
+	oneNodeList = new Queue;
+
+	oneNodeList->enqueue(1, 2, 3);
+	oneNodeList->enqueue(4, 5, 6);
+
+	if (oneNodeList->getpHead()->getData()->getCustomerNumber() != 4) {
+		cout << "Check enqueue function." << endl;
+	}
+	else {
+		cout << "Enqueue works for one node queue" << endl;
+	}
+
+
+}
+
+void test::testCaseOneNodeDequeue(void) {
+
+	cout << "Test Case: Dequeue on a Queue with One Node" << endl;
+
+	Queue* oneNodeList;
+	oneNodeList = new Queue;
+
+
+	int num1 = 1, num2 = 2, num3 = 3;
+	int& ref1 = num1, & ref2 = num2, & ref3 = num3;
+	oneNodeList->enqueue(num1, num2, num3);
+	oneNodeList->dequeue(ref1, ref2, ref3);
+
+	if (oneNodeList->getpHead() != nullptr) {
+		cout << "Check dequeue function." <<  endl;
+	}else{
+		cout << "Dequeue works for one node queue" << endl;
+	}
+
+
+
+}
+
+
+void test::testCaseTwoNodesDequeue(void) {
+
+	cout << "Test Case: Dequeue on a Queue with Two Nodes" << endl;
+
+	Queue* twoNodeList;
+	twoNodeList = new Queue;
+
+
+	int num1 = 1, num2 = 2, num3 = 3;
+	int& ref1 = num1, & ref2 = num2, & ref3 = num3;
+
+	twoNodeList->enqueue(4, 5, 7);
+
+	twoNodeList->enqueue(num1, num2, num3);
+	twoNodeList->dequeue(ref1, ref2, ref3);
+
+	if (twoNodeList->getpHead()->getData()->getCustomerNumber()!=4) {
+		cout << "Check dequeue function." << endl;
+	}
+	else {
+		cout << "Dequeue works for a two node queue" << endl;
+	}
+
+
+}
+
+void test::runTestSimulation(void) {
+
+	cout << "Test Case: 24 hour simulation" << endl;
+
+	Queue* expressLane;
+	Queue* normalLane;
 	expressLane = new Queue;
 	normalLane = new Queue;
 
@@ -66,9 +162,9 @@ int main(void) {
 			int& ref3 = tTime;
 
 			normalLane->dequeue(ref1, ref2, ref3);
-			
+
 		}*/
-		 
+
 		if (elapsedMins == eLaneArrTime) {
 
 			// first calculate total time - ServiceTime + sum of 
@@ -76,7 +172,7 @@ int main(void) {
 			eTotalT = expressLane->calcTotalServiceTime(expressLane->getpHead());
 
 			expressLane->enqueue(++eCusNum, eSerTime = rand() % 5 + 1, eTotalT);
-			
+
 			//int eCurMins = elapsedMins;
 
 			eLaneArrTime = elapsedMins + (rand() % 5 + 1);
@@ -91,7 +187,7 @@ int main(void) {
 			nTotalT = normalLane->calcTotalServiceTime(normalLane->getpHead());
 
 
-			normalLane->enqueue(++nCusNum, nSerTime = rand() % 8+3, nTotalT);
+			normalLane->enqueue(++nCusNum, nSerTime = rand() % 8 + 3, nTotalT);
 
 			//int nCurMins = elapsedMins;
 
@@ -102,10 +198,10 @@ int main(void) {
 
 		if (elapsedMins % 120 == 0) {
 
-			cout <<endl<< "EXPRESS LANE" << endl << endl;
+			cout << "EXPRESS LANE" << endl << endl;
 			expressLane->printQueue(epCur);
 
-			cout <<endl<< "NORMAL LANE" << endl << endl;
+			cout << "NORMAL LANE" << endl << endl;
 			normalLane->printQueue(npCur);
 
 			epCur = expressLane->getpTail();
@@ -120,11 +216,7 @@ int main(void) {
 		Sleep(0); // simulating one min
 	}
 
-	//expressLane->enqueue(4, 2, 6);
-	//expressLane->enqueue(5, 3, 7);
-	//expressLane->enqueue(6, 4, 8);
-
-
 
 
 }
+

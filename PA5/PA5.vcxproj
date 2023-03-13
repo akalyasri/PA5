@@ -129,11 +129,13 @@
   <ItemGroup>
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="testCase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data.hpp" />
     <ClInclude Include="queue.hpp" />
     <ClInclude Include="queueNode.hpp" />
+    <ClInclude Include="testCase.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
