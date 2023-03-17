@@ -34,9 +34,11 @@ int main(void) {
 	int eTimer = rand() % 5 + 1;
 	int nTimer = rand() % 8 + 3;
 
+	int timesPrinted = 0;
 
-	QueueNode* epCur = expressLane->getpHead();
-	QueueNode* npCur = normalLane->getpHead();
+	QueueNode* epCur = nullptr;
+	QueueNode* npCur = nullptr;
+
 
 	while (elapsedMins <= (24 * 60)) {
 
@@ -122,8 +124,18 @@ int main(void) {
 
 		}
 
+
+		
+		
+
 		//print every 10 mins
 		if (elapsedMins % 10 == 0 && elapsedMins != 0) { 
+
+			if (timesPrinted == 0) {
+				epCur = expressLane->getpHead();
+				npCur = normalLane->getpHead();
+			}
+			
 
 			cout << endl;
 
@@ -136,10 +148,12 @@ int main(void) {
 			normalLane->printQueue(npCur);
 
 			cout << endl;
-
+		
 			epCur = expressLane->getpTail();
 			npCur = normalLane->getpTail();
-
+		
+			
+			timesPrinted++;
 		}
 
 		/*eTimer--;

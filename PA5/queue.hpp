@@ -112,9 +112,12 @@ public: // Member functions
 
 	void printQueue(QueueNode *cur) {
 
-		if (cur != nullptr) {
+		while (cur != nullptr) {
 			cout <<"customer Number: "<< cur->getData()->getCustomerNumber() << endl;
-			printQueue(cur->getPNext());
+			
+			cur = cur->getPNext();
+
+			//printQueue(cur->getPNext());
 		}
 
 	}
