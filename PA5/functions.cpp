@@ -33,12 +33,45 @@ void run24Simulation(void) {
 
 	while (elapsedMins < (24 * 60)) {
 
-		if (elapsedMins != eTimer  && !expressLane->isEmpty()) {
+
+
+		if (elapsedMins == eLaneArrTime) {
+
+			// first calculate total time - ServiceTime + sum of 
+			// serviceTimes of customers in line before this customer
+			eTotalT = expressLane->calcTotalServiceTime(expressLane->getpHead());
+
+			expressLane->enqueue(++eCusNum, eSerTime = rand() % 5 + 1, eTotalT);
+
+			//int eCurMins = elapsedMins;
+
+			eLaneArrTime = elapsedMins + (rand() % 5 + 1);
+
+
+		}
+
+		if (elapsedMins == nLaneArrTime) {
+
+			// first calculate total time - ServiceTime + sum of 
+			// serviceTimes of customers in line before this customer
+			nTotalT = normalLane->calcTotalServiceTime(normalLane->getpHead());
+
+
+			normalLane->enqueue(++nCusNum, nSerTime = rand() % 8 + 3, nTotalT);
+
+			//int nCurMins = elapsedMins;
+
+			nLaneArrTime = elapsedMins + (rand() % 8 + 3);
+
+
+		}
+
+		if (elapsedMins != eTimer && !expressLane->isEmpty()) {
 
 			eTimer = elapsedMins + (expressLane->getpHead()->getData()->getServiceTime());
 		}
 
-		else if (eTimer == 0 && !expressLane->isEmpty()) {
+		else if (elapsedMins == eTimer && !expressLane->isEmpty()) {
 			int cNum = expressLane->getpHead()->getData()->getCustomerNumber();
 			int sNum = expressLane->getpHead()->getData()->getServiceTime();
 			int tTime = expressLane->getpHead()->getData()->getTotalTime();
@@ -46,7 +79,7 @@ void run24Simulation(void) {
 			int& ref2 = sNum;
 			int& ref3 = tTime;
 
-			expressLane->dequeue(ref1,ref2,ref3);
+			expressLane->dequeue(ref1, ref2, ref3);
 		}
 
 		if (elapsedMins != nTimer && !normalLane->isEmpty()) {
@@ -66,44 +99,13 @@ void run24Simulation(void) {
 
 		}
 
-		if (elapsedMins == eLaneArrTime) {
+		if (elapsedMins % 1400 == 0) {
 
-			// first calculate total time - ServiceTime + sum of 
-			// serviceTimes of customers in line before this customer
-			eTotalT = expressLane->calcTotalServiceTime(expressLane->getpHead());
+			/*	cout << "EXPRESS LANE" << endl << endl;
+				expressLane->printQueue(epCur);
 
-			expressLane->enqueue(++eCusNum, eSerTime = rand() % 5 + 1, eTotalT);
-
-			//int eCurMins = elapsedMins;
-
-			eLaneArrTime = elapsedMins + (rand() % 5 + 1);
-
-			
-		}
-
-		if (elapsedMins == nLaneArrTime) {
-
-			// first calculate total time - ServiceTime + sum of 
-			// serviceTimes of customers in line before this customer
-			nTotalT = normalLane->calcTotalServiceTime(normalLane->getpHead());
-
-
-			normalLane->enqueue(++nCusNum, nSerTime = rand() % 8 + 3, nTotalT);
-
-			//int nCurMins = elapsedMins;
-
-			nLaneArrTime = elapsedMins + (rand() % 8 + 3);
-
-			
-		}
-
-		if (elapsedMins % 120 == 0) {
-
-		/*	cout << "EXPRESS LANE" << endl << endl;
-			expressLane->printQueue(epCur);
-
-			cout << "NORMAL LANE" << endl << endl;
-			normalLane->printQueue(npCur);*/
+				cout << "NORMAL LANE" << endl << endl;
+				normalLane->printQueue(npCur);*/
 
 			epCur = expressLane->getpTail();
 			npCur = normalLane->getpTail();
@@ -118,12 +120,11 @@ void run24Simulation(void) {
 	}
 
 	cout << "print recent queue" << endl;
-	
+
 	cout << "EXPRESS LANE" << endl << endl;
 	expressLane->printQueue(epCur);
 
 	cout << "NORMAL LANE" << endl << endl;
 	normalLane->printQueue(npCur);
-
 
 }

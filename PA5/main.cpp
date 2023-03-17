@@ -74,7 +74,7 @@ int main(void) {
 			eTimer = elapsedMins + (expressLane->getpHead()->getData()->getServiceTime());
 		}
 
-		else if (eTimer == 0 && !expressLane->isEmpty()) {
+		else if (elapsedMins == eTimer && !expressLane->isEmpty()) {
 			int cNum = expressLane->getpHead()->getData()->getCustomerNumber();
 			int sNum = expressLane->getpHead()->getData()->getServiceTime();
 			int tTime = expressLane->getpHead()->getData()->getTotalTime();
@@ -102,7 +102,7 @@ int main(void) {
 
 		}
 
-		if (elapsedMins % 120 == 0) {
+		if (elapsedMins % 1400 == 0) {
 
 			/*	cout << "EXPRESS LANE" << endl << endl;
 				expressLane->printQueue(epCur);

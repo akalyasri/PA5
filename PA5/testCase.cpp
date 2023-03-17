@@ -102,6 +102,8 @@ void test::runTestSimulation(void) {
 
 	cout << "Test Case: 24 hour simulation" << endl;
 
+	
+
 	Queue* expressLane;
 	Queue* normalLane;
 	expressLane = new Queue;
@@ -132,38 +134,7 @@ void test::runTestSimulation(void) {
 
 	while (elapsedMins < (24 * 60)) {
 
-		if (elapsedMins != eTimer && !expressLane->isEmpty()) {
 
-			eTimer = elapsedMins + (expressLane->getpHead()->getData()->getServiceTime());
-		}
-
-		else if (eTimer == 0 && !expressLane->isEmpty()) {
-			int cNum = expressLane->getpHead()->getData()->getCustomerNumber();
-			int sNum = expressLane->getpHead()->getData()->getServiceTime();
-			int tTime = expressLane->getpHead()->getData()->getTotalTime();
-			int& ref1 = cNum;
-			int& ref2 = sNum;
-			int& ref3 = tTime;
-
-			expressLane->dequeue(ref1, ref2, ref3);
-		}
-
-		if (elapsedMins != nTimer && !normalLane->isEmpty()) {
-
-			nTimer = elapsedMins + (normalLane->getpHead()->getData()->getServiceTime());
-		}
-
-		else if (elapsedMins == nTimer && !normalLane->isEmpty()) {
-			int cNum = normalLane->getpHead()->getData()->getCustomerNumber();
-			int sNum = normalLane->getpHead()->getData()->getServiceTime();
-			int tTime = normalLane->getpHead()->getData()->getTotalTime();
-			int& ref1 = cNum;
-			int& ref2 = sNum;
-			int& ref3 = tTime;
-
-			normalLane->dequeue(ref1, ref2, ref3);
-
-		}
 
 		if (elapsedMins == eLaneArrTime) {
 
@@ -196,7 +167,40 @@ void test::runTestSimulation(void) {
 
 		}
 
-		if (elapsedMins % 120 == 0) {
+		if (elapsedMins != eTimer && !expressLane->isEmpty()) {
+
+			eTimer = elapsedMins + (expressLane->getpHead()->getData()->getServiceTime());
+		}
+
+		else if (elapsedMins == eTimer && !expressLane->isEmpty()) {
+			int cNum = expressLane->getpHead()->getData()->getCustomerNumber();
+			int sNum = expressLane->getpHead()->getData()->getServiceTime();
+			int tTime = expressLane->getpHead()->getData()->getTotalTime();
+			int& ref1 = cNum;
+			int& ref2 = sNum;
+			int& ref3 = tTime;
+
+			expressLane->dequeue(ref1, ref2, ref3);
+		}
+
+		if (elapsedMins != nTimer && !normalLane->isEmpty()) {
+
+			nTimer = elapsedMins + (normalLane->getpHead()->getData()->getServiceTime());
+		}
+
+		else if (elapsedMins == nTimer && !normalLane->isEmpty()) {
+			int cNum = normalLane->getpHead()->getData()->getCustomerNumber();
+			int sNum = normalLane->getpHead()->getData()->getServiceTime();
+			int tTime = normalLane->getpHead()->getData()->getTotalTime();
+			int& ref1 = cNum;
+			int& ref2 = sNum;
+			int& ref3 = tTime;
+
+			normalLane->dequeue(ref1, ref2, ref3);
+
+		}
+
+		if (elapsedMins % 1400 == 0) {
 
 			/*	cout << "EXPRESS LANE" << endl << endl;
 				expressLane->printQueue(epCur);
@@ -223,8 +227,6 @@ void test::runTestSimulation(void) {
 
 	cout << "NORMAL LANE" << endl << endl;
 	normalLane->printQueue(npCur);
-
-
 
 
 }
