@@ -24,8 +24,8 @@ void run24Simulation(void) {
 	int eTotalT = 0;
 	int nTotalT = 0;
 
-	int eTimer = 5;
-	int nTimer = 5;
+	int eTimer = rand() % 5 + 1;
+	int nTimer = rand() % 8 + 3;
 
 
 	QueueNode* epCur = expressLane->getpHead();
@@ -33,9 +33,9 @@ void run24Simulation(void) {
 
 	while (elapsedMins < (24 * 60)) {
 
-		/*if (eTimer <0 && !expressLane->isEmpty()) {
+		if (elapsedMins != eTimer  && !expressLane->isEmpty()) {
 
-			eTimer = expressLane->getpHead()->getData()->getServiceTime();
+			eTimer = elapsedMins + (expressLane->getpHead()->getData()->getServiceTime());
 		}
 
 		else if (eTimer == 0 && !expressLane->isEmpty()) {
@@ -49,12 +49,12 @@ void run24Simulation(void) {
 			expressLane->dequeue(ref1,ref2,ref3);
 		}
 
-		if (nTimer < 0 && !normalLane->isEmpty()) {
+		if (elapsedMins != nTimer && !normalLane->isEmpty()) {
 
-			nTimer = normalLane->getpHead()->getData()->getServiceTime();
+			nTimer = elapsedMins + (normalLane->getpHead()->getData()->getServiceTime());
 		}
 
-		else if (nTimer == 0 && !normalLane->isEmpty()) {
+		else if (elapsedMins == nTimer && !normalLane->isEmpty()) {
 			int cNum = normalLane->getpHead()->getData()->getCustomerNumber();
 			int sNum = normalLane->getpHead()->getData()->getServiceTime();
 			int tTime = normalLane->getpHead()->getData()->getTotalTime();
@@ -64,7 +64,7 @@ void run24Simulation(void) {
 
 			normalLane->dequeue(ref1, ref2, ref3);
 
-		}*/
+		}
 
 		if (elapsedMins == eLaneArrTime) {
 
@@ -78,7 +78,7 @@ void run24Simulation(void) {
 
 			eLaneArrTime = elapsedMins + (rand() % 5 + 1);
 
-			//then sort express lane queue based on service time
+			
 		}
 
 		if (elapsedMins == nLaneArrTime) {
@@ -94,26 +94,36 @@ void run24Simulation(void) {
 
 			nLaneArrTime = elapsedMins + (rand() % 8 + 3);
 
-			//then sort normal lane queue based on service time
+			
 		}
 
 		if (elapsedMins % 120 == 0) {
 
-			cout << "EXPRESS LANE" << endl << endl;
+		/*	cout << "EXPRESS LANE" << endl << endl;
 			expressLane->printQueue(epCur);
 
 			cout << "NORMAL LANE" << endl << endl;
-			normalLane->printQueue(npCur);
+			normalLane->printQueue(npCur);*/
 
 			epCur = expressLane->getpTail();
 			npCur = normalLane->getpTail();
 
 		}
 
-		eTimer--;
-		nTimer--;
+		/*eTimer--;
+		nTimer--;*/
 		elapsedMins++; // one min has passed
 
 		Sleep(0); // simulating one min
 	}
+
+	cout << "print recent queue" << endl;
+	
+	cout << "EXPRESS LANE" << endl << endl;
+	expressLane->printQueue(epCur);
+
+	cout << "NORMAL LANE" << endl << endl;
+	normalLane->printQueue(npCur);
+
+
 }
