@@ -39,7 +39,7 @@ int main(void) {
 	QueueNode* npCur = nullptr;
 
 
-	while (elapsedMins <= (24 * 60)) {
+	while (elapsedMins < (24 * 60)) {
 
 		
 		// express lane enqueue
@@ -57,32 +57,34 @@ int main(void) {
 			eLaneArrTime = elapsedMins + (rand() % 5 + 1);
 
 
-			// express lane dequeue
-			if (elapsedMins != eTimer && !expressLane->isEmpty()) {
-
-				eTimer = elapsedMins + (expressLane->getpHead()->getData()->getServiceTime());
-			}
-			else if ((elapsedMins == eTimer) && !(expressLane->isEmpty())) {
-				int cNum = 0;
-				int sNum = 0;
-				int tTime = 0;
-				int& ref1 = cNum;
-				int& ref2 = sNum;
-				int& ref3 = tTime;
-
 			
-				if (expressLane->dequeue(ref1, ref2, ref3)) {
 
-					cout << "customer exited the express lane at " << eTimer << " mins" << endl;
 
-					eTimer = elapsedMins + (expressLane->getpHead()->getData()->getServiceTime());
-				}
-				else {
-					cout << "Queue empty" << endl;
-				}
+		}
+		// express lane dequeue
+		if (eTimer < 0 && !expressLane->isEmpty()) {
+
+			eTimer =  (expressLane->getpHead()->getData()->getServiceTime());
+		}
+		
+		if ((eTimer == 0) && !(expressLane->isEmpty())) {
+			int cNum = 0;
+			int sNum = 0;
+			int tTime = 0;
+			int& ref1 = cNum;
+			int& ref2 = sNum;
+			int& ref3 = tTime;
+
+
+			if (expressLane->dequeue(ref1, ref2, ref3)) {
+
+				cout << "customer exited the express lane at " << eTimer << " mins" << endl;
+
+				
 			}
-
-
+			else {
+				cout << "Queue empty" << endl;
+			}
 		}
 
 
@@ -101,33 +103,36 @@ int main(void) {
 			nLaneArrTime = elapsedMins + (rand() % 8 + 3);
 
 
-			// normal lane dequeue
-			if (elapsedMins != nTimer && !normalLane->isEmpty()) {
-				
-				nTimer = elapsedMins + (normalLane->getpHead()->getData()->getServiceTime());
+			
+
+
+		}
+
+		// normal lane dequeue
+		if (nTimer < 0 && !normalLane->isEmpty()) {
+
+			nTimer = (normalLane->getpHead()->getData()->getServiceTime());
+
+		}
+		
+		if (nTimer == 0 && !normalLane->isEmpty()) {
+			int cNum = 0;
+			int sNum = 0;
+			int tTime = 0;
+			int& ref1 = cNum;
+			int& ref2 = sNum;
+			int& ref3 = tTime;
+
+
+			if (normalLane->dequeue(ref1, ref2, ref3)) {
+
+				cout << "customer exited the normal lane at " << nTimer << " mins" << endl;
+
 				
 			}
-			else if (elapsedMins == nTimer && !normalLane->isEmpty()) {
-				int cNum = 0;
-				int sNum = 0;
-				int tTime = 0;
-				int& ref1 = cNum;
-				int& ref2 = sNum;
-				int& ref3 = tTime;
-
-				
-				if (normalLane->dequeue(ref1, ref2, ref3)) {
-
-					cout << "customer exited the normal lane at " << nTimer << " mins" << endl;
-
-					nTimer = elapsedMins + (normalLane->getpHead()->getData()->getServiceTime());
-				}
-				else {
-					cout << "Queue empty" << endl;
-				}
+			else {
+				cout << "Queue empty" << endl;
 			}
-
-
 		}
 
 
@@ -149,8 +154,8 @@ int main(void) {
 		
 		}
 
-		/*eTimer--;
-		nTimer--;*/
+		eTimer--;
+		nTimer--;
 		elapsedMins++; // one min has passed
 
 		Sleep(0); // simulating one min
