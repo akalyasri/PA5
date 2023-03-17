@@ -68,11 +68,10 @@ public: // Member functions
 
 	void destroyQueue()
 	{
-		while (!isEmpty())
-		{
-			int cNum = expressLane->getpHead()->getData()->getCustomerNumber();
-			int sNum = expressLane->getpHead()->getData()->getServiceTime();
-			int tTime = expressLane->getpHead()->getData()->getTotalTime();
+		while (!isEmpty()) {
+			int cNum = 0;			//this->getpHead()->getData()->getCustomerNumber();
+			int sNum = 0; // this->getpHead()->getData()->getServiceTime();
+			int tTime = 0; //this->getpHead()->getData()->getTotalTime();
 			int& ref1 = cNum;
 			int& ref2 = sNum;
 			int& ref3 = tTime;
@@ -114,7 +113,7 @@ public: // Member functions
 	void printQueue(QueueNode *cur) {
 
 		if (cur != nullptr) {
-			cout <<"Customer Number: "<< cur->getData()->getCustomerNumber() << endl;
+			cout <<"customer Number: "<< cur->getData()->getCustomerNumber() << endl;
 			printQueue(cur->getPNext());
 		}
 
