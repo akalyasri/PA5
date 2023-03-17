@@ -37,7 +37,7 @@ int main(void) {
 	while (elapsedMins < (24 * 60)) {
 
 		
-
+		// express lane enqueue
 		if (elapsedMins == eLaneArrTime) {
 
 			// first calculate total time - ServiceTime + sum of 
@@ -51,8 +51,27 @@ int main(void) {
 			eLaneArrTime = elapsedMins + (rand() % 5 + 1);
 
 
+			// express lane dequeue
+			if (elapsedMins != eTimer && !expressLane->isEmpty()) {
+
+				eTimer = elapsedMins + (expressLane->getpHead()->getData()->getServiceTime());
+			}
+			else if (elapsedMins == eTimer && !expressLane->isEmpty()) {
+				int cNum = expressLane->getpHead()->getData()->getCustomerNumber();
+				int sNum = expressLane->getpHead()->getData()->getServiceTime();
+				int tTime = expressLane->getpHead()->getData()->getTotalTime();
+				int& ref1 = cNum;
+				int& ref2 = sNum;
+				int& ref3 = tTime;
+
+				expressLane->dequeue(ref1, ref2, ref3);
+			}
+
+
 		}
 
+
+		// normal lane enqueue
 		if (elapsedMins == nLaneArrTime) {
 
 			// first calculate total time - ServiceTime + sum of 
@@ -67,40 +86,26 @@ int main(void) {
 			nLaneArrTime = elapsedMins + (rand() % 8 + 3);
 
 
-		}
+			// normal lane dequeue
+			if (elapsedMins != nTimer && !normalLane->isEmpty()) {
 
-		if (elapsedMins != eTimer && !expressLane->isEmpty()) {
+				nTimer = elapsedMins + (normalLane->getpHead()->getData()->getServiceTime());
+			}
+			else if (elapsedMins == nTimer && !normalLane->isEmpty()) {
+				int cNum = normalLane->getpHead()->getData()->getCustomerNumber();
+				int sNum = normalLane->getpHead()->getData()->getServiceTime();
+				int tTime = normalLane->getpHead()->getData()->getTotalTime();
+				int& ref1 = cNum;
+				int& ref2 = sNum;
+				int& ref3 = tTime;
 
-			eTimer = elapsedMins + (expressLane->getpHead()->getData()->getServiceTime());
-		}
+				normalLane->dequeue(ref1, ref2, ref3);
 
-		else if (elapsedMins == eTimer && !expressLane->isEmpty()) {
-			int cNum = expressLane->getpHead()->getData()->getCustomerNumber();
-			int sNum = expressLane->getpHead()->getData()->getServiceTime();
-			int tTime = expressLane->getpHead()->getData()->getTotalTime();
-			int& ref1 = cNum;
-			int& ref2 = sNum;
-			int& ref3 = tTime;
+			}
 
-			expressLane->dequeue(ref1, ref2, ref3);
-		}
-
-		if (elapsedMins != nTimer && !normalLane->isEmpty()) {
-
-			nTimer = elapsedMins + (normalLane->getpHead()->getData()->getServiceTime());
-		}
-
-		else if (elapsedMins == nTimer && !normalLane->isEmpty()) {
-			int cNum = normalLane->getpHead()->getData()->getCustomerNumber();
-			int sNum = normalLane->getpHead()->getData()->getServiceTime();
-			int tTime = normalLane->getpHead()->getData()->getTotalTime();
-			int& ref1 = cNum;
-			int& ref2 = sNum;
-			int& ref3 = tTime;
-
-			normalLane->dequeue(ref1, ref2, ref3);
 
 		}
+
 
 		if (elapsedMins % 1400 == 0) {
 
@@ -122,7 +127,7 @@ int main(void) {
 		Sleep(0); // simulating one min
 	}
 
-	cout << "print recent queue" << endl;
+	cout << "Recent queue:" << endl;
 
 	cout << "EXPRESS LANE" << endl << endl;
 	expressLane->printQueue(epCur);

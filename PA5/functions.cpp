@@ -3,6 +3,8 @@
 
 
 void run24Simulation(void) {
+	
+
 	Queue* expressLane;
 	Queue* normalLane;
 	expressLane = new Queue;
