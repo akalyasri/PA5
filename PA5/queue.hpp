@@ -19,7 +19,34 @@ public: // Member functions
 
 	}
 
+	~Queue() {
+		destroyQueue();
+	}
 
+	// precondition: Queue must not be empty 
+	// code we created in class w Andy
+	//string dequeue()
+	//{
+	//	QueueNode* pTemp = this->pHead;
+	//	string data = this->pHead->getData();
+
+	//	// recall: precondition is that the Queue must not be
+	//	// empty so if mpHead and mpTail are the same it
+	//	// means there's only 1 node in the Queue
+	//	if (this->pHead == this->pTail) // one node?
+	//	{
+	//		// there's one node in the Queue
+	//		this->pHead = this->pTail = nullptr;
+	//	}
+	//	else
+	//	{
+	//		this->pHead = this->pHead->getPNext();
+	//	}
+
+	//	delete pTemp; // invoke the destructor for a Node
+
+	//	return data;
+	//}
 
 	void enqueue(int cusNum, int serTime, int totalT) { // insert at end
 
@@ -39,7 +66,21 @@ public: // Member functions
 
 	}
 
+	void destroyQueue()
+	{
+		while (!isEmpty())
+		{
+			int cNum = expressLane->getpHead()->getData()->getCustomerNumber();
+			int sNum = expressLane->getpHead()->getData()->getServiceTime();
+			int tTime = expressLane->getpHead()->getData()->getTotalTime();
+			int& ref1 = cNum;
+			int& ref2 = sNum;
+			int& ref3 = tTime;
 
+			cout << "deleting " << dequeue(ref1, ref2, ref3) << endl;
+
+		}
+	}
 
 	//void enqueueData(Data& newData) {
 
