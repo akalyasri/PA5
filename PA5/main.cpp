@@ -65,9 +65,9 @@ int main(void) {
 				eTimer = elapsedMins + (expressLane->getpHead()->getData()->getServiceTime());
 			}*/
 			if (elapsedMins == eTimer && !expressLane->isEmpty()) {
-				int cNum = 0;// expressLane->getpHead()->getData()->getCustomerNumber();
-				int sNum = 0;// expressLane->getpHead()->getData()->getServiceTime();
-				int tTime = 0;// expressLane->getpHead()->getData()->getTotalTime();
+				int cNum = 0;
+				int sNum = 0;
+				int tTime = 0;
 				int& ref1 = cNum;
 				int& ref2 = sNum;
 				int& ref3 = tTime;
@@ -106,9 +106,9 @@ int main(void) {
 				
 			}*/
 			if (elapsedMins == nTimer && !normalLane->isEmpty()) {
-				int cNum = 0;// normalLane->getpHead()->getData()->getCustomerNumber();
-				int sNum = 0;// normalLane->getpHead()->getData()->getServiceTime();
-				int tTime = 0;// normalLane->getpHead()->getData()->getTotalTime();
+				int cNum = 0;
+				int sNum = 0;
+				int tTime = 0;
 				int& ref1 = cNum;
 				int& ref2 = sNum;
 				int& ref3 = tTime;
@@ -124,9 +124,6 @@ int main(void) {
 
 		}
 
-
-		
-		
 
 		//print every 10 mins
 		if (elapsedMins % 10 == 0 && elapsedMins != 0) { 
