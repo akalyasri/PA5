@@ -78,12 +78,12 @@ int main(void) {
 
 			if (expressLane->dequeue(ref1, ref2, ref3)) {
 
-				cout << "customer exited the express lane at " << eTimer << " mins" << endl;
+				cout << "customer exited the express lane at " << elapsedMins << " mins" << endl;
 
 				
 			}
 			else {
-				cout << "Queue empty" << endl;
+				cout << "Queue empty" << endl; // for decoding
 			}
 		}
 
@@ -126,12 +126,12 @@ int main(void) {
 
 			if (normalLane->dequeue(ref1, ref2, ref3)) {
 
-				cout << "customer exited the normal lane at " << nTimer << " mins" << endl;
+				cout << "customer exited the normal lane at " << elapsedMins << " mins" << endl;
 
 				
 			}
 			else {
-				cout << "Queue empty" << endl;
+				cout << "Queue empty" << endl; // for decoding
 			}
 		}
 
