@@ -34,7 +34,6 @@ int main(void) {
 	int eTimer = rand() % 5 + 1;
 	int nTimer = rand() % 8 + 3;
 
-	int timesPrinted = 0;
 
 	QueueNode* epCur = nullptr;
 	QueueNode* npCur = nullptr;
@@ -46,8 +45,7 @@ int main(void) {
 		// express lane enqueue
 		if (elapsedMins == eLaneArrTime) {
 
-			// first calculate total time - ServiceTime + sum of 
-			// serviceTimes of customers in line before this customer
+			// first calculate total time - ServiceTime + sum of ServiceTimes of customers in line before this customer
 			eTotalT = expressLane->calcTotalServiceTime(expressLane->getpHead());
 
 			
@@ -79,6 +77,9 @@ int main(void) {
 
 					eTimer = elapsedMins + (expressLane->getpHead()->getData()->getServiceTime());
 				}
+				else {
+					cout << "Queue empty" << endl;
+				}
 			}
 
 
@@ -88,8 +89,7 @@ int main(void) {
 		// normal lane enqueue
 		if (elapsedMins == nLaneArrTime) {
 
-			// first calculate total time - ServiceTime + sum of 
-			// serviceTimes of customers in line before this customer
+			// first calculate total time - ServiceTime + sum of serviceTimes of customers in line before this customer
 			nTotalT = normalLane->calcTotalServiceTime(normalLane->getpHead());
 
 			
@@ -122,6 +122,9 @@ int main(void) {
 
 					nTimer = elapsedMins + (normalLane->getpHead()->getData()->getServiceTime());
 				}
+				else {
+					cout << "Queue empty" << endl;
+				}
 			}
 
 
@@ -130,13 +133,7 @@ int main(void) {
 
 		//print every 10 mins
 		if (elapsedMins % 10 == 0 && elapsedMins != 0) { 
-
-			/*if (timesPrinted == 0) {
-				epCur = expressLane->getpHead();
-				npCur = normalLane->getpHead();
-			}*/
 			
-
 			cout << endl;
 
 			cout << "EXPRESS LANE" << endl;
@@ -149,11 +146,7 @@ int main(void) {
 
 			cout << endl;
 		
-			/*epCur = expressLane->getpTail();
-			npCur = normalLane->getpTail();*/
 		
-			
-			timesPrinted++;
 		}
 
 		/*eTimer--;
