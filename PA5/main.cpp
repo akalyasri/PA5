@@ -7,6 +7,10 @@ Queue* normalLane;
 
 int main(void) {
 
+	cout << "Start 24 Hour Simulation:" << endl;
+	system("pause");
+	system("cls");
+
 	
 	expressLane = new Queue;
 	normalLane = new Queue;
