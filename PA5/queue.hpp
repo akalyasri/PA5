@@ -110,12 +110,21 @@ public: // Member functions
 
 	}
 
-	void printQueue(QueueNode *cur) {
+	void printQueue() {
 
-		while (cur != nullptr) {
-			cout <<"customer Number: "<< cur->getData()->getCustomerNumber() << endl;
+		if (pHead == nullptr) {
+
+			cout << "Empty Queue" << endl;
+
+
+		}
+
+		QueueNode* pCur = pHead;
+
+		while (pCur != nullptr) {
+			cout <<"customer Number: "<< pCur->getData()->getCustomerNumber() << endl;
 			
-			cur = cur->getPNext();
+			pCur = pCur->getPNext();
 
 			//printQueue(cur->getPNext());
 		}

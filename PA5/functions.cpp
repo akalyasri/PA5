@@ -121,12 +121,12 @@ void run24Simulation(void) {
 		Sleep(0); // simulating one min
 	}
 
-	cout << "print recent queue" << endl;
+	/*cout << "print recent queue" << endl;
 
 	cout << "EXPRESS LANE" << endl << endl;
 	expressLane->printQueue(epCur);
 
 	cout << "NORMAL LANE" << endl << endl;
-	normalLane->printQueue(npCur);
+	normalLane->printQueue(npCur);*/
 
 }
